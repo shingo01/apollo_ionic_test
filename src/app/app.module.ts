@@ -15,8 +15,8 @@ import {InMemoryCache} from '@apollo/client/core';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, 
-    IonicModule.forRoot(), 
+  imports: [BrowserModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     ApolloModule,
@@ -24,14 +24,12 @@ import {InMemoryCache} from '@apollo/client/core';
   providers: [
     {
       provide: APOLLO_OPTIONS,
-      useFactory: (httpLink: HttpLink) => {
-        return {
+      useFactory: (httpLink: HttpLink) => ({
           cache: new InMemoryCache(),
           link: httpLink.create({
             uri: 'http://localhost:8000/graphql/',
           }),
-        };
-      },
+        }),
       deps: [HttpLink],
     },
   ],
